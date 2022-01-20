@@ -15,13 +15,13 @@ namespace Toyota.Helpers
         public static String CreateDirectory(String directoryPath)
         {
             DateTime date = DateTime.Now;
-            if (!Directory.Exists(directoryPath + "\\" + date.Year))
-                Directory.CreateDirectory(directoryPath + "\\" + date.Year);
+            if (!Directory.Exists(WebRootStoragePath + directoryPath + "\\" + date.Year))
+                Directory.CreateDirectory(WebRootStoragePath + directoryPath + "\\" + date.Year);
 
-            if (!Directory.Exists(directoryPath + "\\" + date.Year + "\\" + date.Month))
-                Directory.CreateDirectory(directoryPath + "\\" + date.Year + "\\" + date.Month);
+            if (!Directory.Exists(WebRootStoragePath + directoryPath + "\\" + date.Year + "\\" + date.Month))
+                Directory.CreateDirectory(WebRootStoragePath + directoryPath + "\\" + date.Year + "\\" + date.Month);
 
-            return directoryPath + "\\" + date.Year + "\\" + date.Month;
+            return directoryPath + "/" + date.Year + "/" + date.Month;
         }
 
         public static string GetDefaultExtension(string mimeType)
@@ -41,11 +41,10 @@ namespace Toyota.Helpers
         {
             if (fileToStorage != null)
             {
-                path = WebRootStoragePath + path;
                 path = Media.CreateDirectory(path);
                 path += "\\" + Guid.NewGuid().ToString() + GetDefaultExtension(fileToStorage.ContentType);
 
-                using(var fileStream = new FileStream(path, FileMode.Create))
+                using(var fileStream = new FileStream(WebRootStoragePath + path, FileMode.Create))
                 {
                     await fileToStorage.CopyToAsync(fileStream);
                 }

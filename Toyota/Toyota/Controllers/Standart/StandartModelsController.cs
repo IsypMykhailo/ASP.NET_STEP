@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -54,12 +55,13 @@ namespace Toyota.Controllers.Standart
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Slug,Name,ImgUrl")] Model model)
+        public async Task<IActionResult> Create([Bind("Id,Slug,Name")] Model model, IFormFile fileToStorage)
         {
             if (ModelState.IsValid)
             {
                 model.Id = Guid.NewGuid();
                 _context.Add(model);
+                model.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "models_thumbs");
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

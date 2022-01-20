@@ -60,7 +60,7 @@ namespace Toyota.Controllers.Standart
             if (ModelState.IsValid)
             {
                 color.Id = Guid.NewGuid();
-                color.ImgUrl = await Helpers.Media.UploadImage(fileToStorage);
+                color.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "colors_thumbs");
                 _context.Add(color);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
