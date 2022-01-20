@@ -48,7 +48,7 @@ namespace Toyota.Helpers
                 {
                     await fileToStorage.CopyToAsync(fileStream);
                 }
-                return "/" + path;
+                return "/storage/" + path;
             }
 
             return null;
