@@ -9,6 +9,8 @@ namespace Toyota.Data.Entities
 {
     public class ModificationColors
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
         public Modification Modification { get; set; }
         public Guid ModificationId { get; set; }
 
