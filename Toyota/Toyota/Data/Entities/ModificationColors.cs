@@ -11,6 +11,7 @@ namespace Toyota.Data.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        public string Slug { get; set; }
         public Modification Modification { get; set; }
         public Guid ModificationId { get; set; }
 
