@@ -11,6 +11,7 @@ namespace Toyota.Data.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        [Display(Name = "Название модификации")]
         public string Name { get; set; }
         public string ImgUrl { get; set; }
         public Model Model { get; set; }
