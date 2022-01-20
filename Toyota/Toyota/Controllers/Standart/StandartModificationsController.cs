@@ -80,7 +80,7 @@ namespace Toyota.Controllers.Standart
                 return NotFound();
             }
 
-            var modification = await _context.Modifications.FindAsync(id);
+            var modification = await _context.Modifications.Include(mod=>mod.ModificationColors).FirstAsync(mod=>mod.Id==id);
             if (modification == null)
             {
                 return NotFound();
