@@ -42,13 +42,13 @@ namespace Toyota.Helpers
             if (fileToStorage != null)
             {
                 path = Media.CreateDirectory(path);
-                path += "\\" + Guid.NewGuid().ToString() + GetDefaultExtension(fileToStorage.ContentType);
+                path += "/" + Guid.NewGuid().ToString() + GetDefaultExtension(fileToStorage.ContentType);
 
                 using(var fileStream = new FileStream(WebRootStoragePath + path, FileMode.Create))
                 {
                     await fileToStorage.CopyToAsync(fileStream);
                 }
-                return path;
+                return "/" + path;
             }
 
             return null;

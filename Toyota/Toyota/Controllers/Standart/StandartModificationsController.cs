@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +49,7 @@ namespace Toyota.Controllers.Standart
         // GET: StandartModifications/Create
         public IActionResult Create()
         {
-            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Id");
+            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Name");
             return View();
         }
 
@@ -57,16 +58,17 @@ namespace Toyota.Controllers.Standart
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Slug,Name,ImgUrl,ModelId")] Modification modification)
+        public async Task<IActionResult> Create([Bind("Id,Slug,Name,ModelId")] Modification modification, IFormFile fileToStorage)
         {
             if (ModelState.IsValid)
             {
                 modification.Id = Guid.NewGuid();
+                modification.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "modifications_thumbs");
                 _context.Add(modification);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Id", modification.ModelId);
+            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Name", modification.ModelId);
             return View(modification);
         }
 
@@ -83,7 +85,7 @@ namespace Toyota.Controllers.Standart
             {
                 return NotFound();
             }
-            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Id", modification.ModelId);
+            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Name", modification.ModelId);
             return View(modification);
         }
 
@@ -92,7 +94,7 @@ namespace Toyota.Controllers.Standart
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Slug,Name,ImgUrl,ModelId")] Modification modification)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Slug,Name,ModelId")] Modification modification, IFormFile fileToStorage)
         {
             if (id != modification.Id)
             {
@@ -103,6 +105,7 @@ namespace Toyota.Controllers.Standart
             {
                 try
                 {
+                    modification.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "modifications_thumbs");
                     _context.Update(modification);
                     await _context.SaveChangesAsync();
                 }
@@ -119,7 +122,7 @@ namespace Toyota.Controllers.Standart
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Id", modification.ModelId);
+            ViewData["ModelId"] = new SelectList(_context.Models, "Id", "Name", modification.ModelId);
             return View(modification);
         }
 

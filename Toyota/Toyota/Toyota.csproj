@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Admin\" />
-    <Folder Include="wwwroot\storage\" />
+    <Folder Include="wwwroot\storage\modifications_thumbs\" />
   </ItemGroup>
 
 </Project>

@@ -37,10 +37,10 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImgUrl)
+                <img src=@Html.DisplayFor(modelItem => item.ImgUrl)/>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Model.Id)
+                @Html.DisplayFor(modelItem => item.Model.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
