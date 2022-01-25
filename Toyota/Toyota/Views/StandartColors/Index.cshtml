@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImgUrl)
+                <img class="admin_colors_thumbs" src=@Html.DisplayFor(modelItem => item.ImgUrl)>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

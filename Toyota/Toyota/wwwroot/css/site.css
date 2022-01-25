@@ -1,6 +1,17 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+.admin_colors_thumbs{
+    border: 1px solid black;
+    border-radius: 50%;
+    width:100px;
+    height:100px;
+}
+
+.admin_models_thumbs{
+    width:200px;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
