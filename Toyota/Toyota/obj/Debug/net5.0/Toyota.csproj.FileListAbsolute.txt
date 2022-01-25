@@ -51,7 +51,6 @@ D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\To
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Toyota.csproj.AssemblyReference.cache
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Toyota.GeneratedMSBuildEditorConfig.editorconfig
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Toyota.AssemblyInfoInputs.cache
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Toyota.AssemblyInfo.cs
@@ -177,3 +176,5 @@ D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\To
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\StandartModificationColors\Details.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\StandartModificationColors\Edit.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\StandartModificationColors\Index.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\AdminCars\Index.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\AdminCars\ModelsModifications.cshtml.g.cs

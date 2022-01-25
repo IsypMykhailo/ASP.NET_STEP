@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Admin\" />
     <Folder Include="wwwroot\storage\modifications_thumbs\" />
     <Folder Include="wwwroot\storage\modification_colors_thumbs\" />
   </ItemGroup>
