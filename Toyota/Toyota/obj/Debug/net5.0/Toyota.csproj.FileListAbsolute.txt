@@ -180,3 +180,4 @@ D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\To
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\AdminCars\ModelsModifications.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\AdminCars\CreateModifications.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\AdminCars\CreateModels.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Toyota.csproj.AssemblyReference.cache

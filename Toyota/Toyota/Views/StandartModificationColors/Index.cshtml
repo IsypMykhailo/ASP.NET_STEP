@@ -34,13 +34,13 @@
                 @Html.DisplayFor(modelItem => item.Slug)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Modification.Id)
+                <img class="admin_modifications_thumbs" src=@Html.DisplayFor(modelItem => item.Modification.ImgUrl)>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Color.Id)
+                <img class="admin_colors_thumbs" src=@Html.DisplayFor(modelItem => item.Color.ImgUrl)>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImgUrl)
+                <img class="admin_modifications_thumbs" src=@Html.DisplayFor(modelItem=>item.ImgUrl)>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

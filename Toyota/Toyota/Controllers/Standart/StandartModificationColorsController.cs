@@ -60,7 +60,7 @@ namespace Toyota.Controllers.Standart
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Slug,ModificationId,ColorId,ImgUrl")] ModificationColors modificationColors, IFormFile fileToStorage)
+        public async Task<IActionResult> Create([Bind("Id,Slug,ModificationId,ColorId")] ModificationColors modificationColors, IFormFile fileToStorage)
         {
             if (ModelState.IsValid)
             {
