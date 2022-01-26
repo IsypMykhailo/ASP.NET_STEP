@@ -34,8 +34,16 @@ namespace Toyota.Controllers.Admin
             ViewBag.OpenModel = _context.Models.First(model => model.Id == id);
             return View(await _context.Modifications
                 .Include(modification => modification.ModificationColors)
+                .ThenInclude(modificationColor=>modificationColor.Color)
                 .Where(mod => mod.ModelId == id).ToListAsync());
         }
+
+        /*
+            SELECT * FROM Modification
+            JOIN ModificationColors ON Modification.Id = ModificationColors.ModificationId
+            JOIN Colors ON ModificationColors.ColorId = Colors.Id
+            WHERE Modification.ModelId = [Model.Id]
+         */
 
         public IActionResult CreateModifications()
         {

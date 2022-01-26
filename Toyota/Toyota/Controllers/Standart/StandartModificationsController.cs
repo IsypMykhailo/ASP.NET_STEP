@@ -82,7 +82,7 @@ namespace Toyota.Controllers.Standart
 
             ViewBag.Colors = new SelectList(_context.Colors, "Id", "Name");
 
-            var modification = await _context.Modifications.Include(mod=>mod.ModificationColors).ThenInclude(mc=>mc.Color).FirstAsync(mod=>mod.Id==id);
+            var modification = await _context.Modifications.FindAsync(id);
             if (modification == null)
             {
                 return NotFound();
@@ -107,6 +107,7 @@ namespace Toyota.Controllers.Standart
             {
                 try
                 {
+                    modification.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "modifications_thumbs");
                     _context.Update(modification);
                     await _context.SaveChangesAsync();
                 }
