@@ -21,6 +21,11 @@
         console.log(err);
     }
 
+    function renderModel(obj) {
+        console.log(obj.id);
+        fetch(apiModels + "/" + obj.Id);
+    }
+
     function renderModelsNav(models) {
         //console.log(items);
         let div = document.getElementById("navModels");
@@ -31,6 +36,9 @@
             let li = document.createElement("li");
             li.innerText = model["name"];
             li.id = model["id"];
+            li.onclick = function () {
+                renderModel(this);
+            };
             ul.appendChild(li);
         });
         div.appendChild(ul);

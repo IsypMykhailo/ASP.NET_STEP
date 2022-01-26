@@ -23,3 +23,23 @@
 </div>}
 
 </div>
+
+<br /> <br />
+<h1>Colors</h1>
+<p>
+    <a asp-action="CreateColors" class="btn btn-primary">Create New</a>
+</p>
+<div class="row">
+
+    @foreach (var color in ViewBag.OpenColors)
+    {
+<div class="col-3">
+    <div class="card">
+        <img class="admin_colors_thumbs" src="@color.ImgUrl" /> 
+        <div class="card-body">
+            <h5 class="card-title">@color.Name</h5>
+        </div>
+    </div>
+</div>}
+
+</div>

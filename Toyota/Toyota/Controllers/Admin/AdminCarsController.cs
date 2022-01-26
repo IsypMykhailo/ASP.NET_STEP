@@ -22,6 +22,7 @@ namespace Toyota.Controllers.Admin
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.OpenColors = _context.Colors;
             return View(await _context.Models.ToListAsync());
         }
 
@@ -120,6 +121,30 @@ namespace Toyota.Controllers.Admin
             ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Name", modificationColors.ColorId);
             ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Name", modificationColors.ModificationId);
             return View(modificationColors);
+        }
+
+        // GET: StandartColors/Create
+        public IActionResult CreateColors()
+        {
+            return View();
+        }
+
+        // POST: StandartColors/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateColors([Bind("Id,Slug,Name")] Color color, IFormFile fileToStorage)
+        {
+            if (ModelState.IsValid)
+            {
+                color.Id = Guid.NewGuid();
+                color.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "colors_thumbs");
+                _context.Add(color);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(color);
         }
     }
 }
