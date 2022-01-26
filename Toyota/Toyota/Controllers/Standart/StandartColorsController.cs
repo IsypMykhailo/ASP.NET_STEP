@@ -89,7 +89,7 @@ namespace Toyota.Controllers.Standart
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Slug,Name,ImgUrl")] Color color)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Slug,Name")] Color color, IFormFile fileToStorage)
         {
             if (id != color.Id)
             {
@@ -100,6 +100,7 @@ namespace Toyota.Controllers.Standart
             {
                 try
                 {
+                    color.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "colors_thumbs");
                     _context.Update(color);
                     await _context.SaveChangesAsync();
                 }
