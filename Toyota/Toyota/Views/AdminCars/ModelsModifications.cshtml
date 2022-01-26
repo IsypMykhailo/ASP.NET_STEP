@@ -27,7 +27,10 @@
 
             <h2 class="accordion-header" id=@hId>
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target=#@cId aria-expanded="true" aria-controls="collapse@item.Id">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                    <h5 class="card-title">
+                        <img class="accordion_modification_thumbs" src="@Html.DisplayFor(modelItem=>item.ImgUrl)" />
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </h5>
                 </button>
             </h2>
 
@@ -38,6 +41,9 @@
                 {
                             <img class="admin_colors_thumbs" src="@color.Color.ImgUrl" />
                 }
+                    </p>
+                    <p>
+                        <a asp-action="CreateModificationColors" class="btn btn-primary">Add new modification color</a>
                     </p>
                 </div>
             </div>

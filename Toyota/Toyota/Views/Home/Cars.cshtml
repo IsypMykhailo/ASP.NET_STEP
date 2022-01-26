@@ -4,5 +4,54 @@
 
 <div class="text-center">
     <h1 class="display-4">Cars</h1>
-
 </div>
+<div id="navModels">
+    Ссылки
+</div>
+<div id="mainModels">
+    Активная модель
+</div>
+
+@section Scripts{ 
+<script>
+    let apiModels = "/api/ApiModels";
+
+    function onError(err) {
+        console.log("Err");
+        console.log(err);
+    }
+
+    function renderModelsNav(models) {
+        //console.log(items);
+        let div = document.getElementById("navModels");
+        div.innerHTML = "";
+        let ul = document.createElement("ul");
+        models.map(model => {
+            console.log(model);
+            let li = document.createElement("li");
+            li.innerText = model["name"];
+            li.id = model["id"];
+            ul.appendChild(li);
+        });
+        div.appendChild(ul);
+    }
+
+    function getAllModels() {
+        fetch(apiModels)
+            .then(res => {
+                if (res.status !== 200) {
+                    onError(res);
+                    return;
+                }
+                console.log(res);
+                return res.json();
+            })
+            .then(json => {
+                renderModelsNav(json);
+            })
+            .catch(err => { onError(err); });
+    }
+
+    getAllModels();
+</script>
+}

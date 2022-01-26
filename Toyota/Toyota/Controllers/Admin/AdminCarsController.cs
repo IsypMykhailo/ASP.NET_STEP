@@ -93,5 +93,33 @@ namespace Toyota.Controllers.Admin
             }
             return View(model);
         }
+
+        // GET: StandartModificationColors/Create
+        public IActionResult CreateModificationColors()
+        {
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Name");
+            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Name");
+            return View();
+        }
+
+        // POST: StandartModificationColors/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateModificationColors([Bind("Id,Slug,ModificationId,ColorId")] ModificationColors modificationColors, IFormFile fileToStorage)
+        {
+            if (ModelState.IsValid)
+            {
+                modificationColors.Id = Guid.NewGuid();
+                modificationColors.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "modification_colors_thumbs");
+                _context.Add(modificationColors);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Name", modificationColors.ColorId);
+            ViewData["ModificationId"] = new SelectList(_context.Modifications, "Id", "Name", modificationColors.ModificationId);
+            return View(modificationColors);
+        }
     }
 }
