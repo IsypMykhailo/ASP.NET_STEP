@@ -1,65 +1,89 @@
 ﻿@{
-    ViewData["Title"] = "Cars";
+    ViewData["Title"] = "Cars Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Cars</h1>
 </div>
 <div id="navModels">
-    Ссылки
+    Тут будут ссылки ан название моделей
 </div>
+
 <div id="mainModels">
-    Активная модель
+    Тут будет активная модель
 </div>
 
-@section Scripts{ 
-<script>
-    let apiModels = "/api/ApiModels";
+@section Scripts {
+    <script>
 
-    function onError(err) {
-        console.log("Err");
-        console.log(err);
-    }
+        let apiModels = "/api/ApiModels";
 
-    function renderModel(obj) {
-        console.log(obj.id);
-        fetch(apiModels + "/" + obj.Id);
-    }
+        function onError(err) {
+            console.log("Err");
+            console.log(err);
+        }
 
-    function renderModelsNav(models) {
-        //console.log(items);
-        let div = document.getElementById("navModels");
-        div.innerHTML = "";
-        let ul = document.createElement("ul");
-        models.map(model => {
-            console.log(model);
-            let li = document.createElement("li");
-            li.innerText = model["name"];
-            li.id = model["id"];
-            li.onclick = function () {
-                renderModel(this);
-            };
-            ul.appendChild(li);
-        });
-        div.appendChild(ul);
-    }
+        function renderModel(obj) {
+            console.log(obj.id);
+            fetch(apiModels + "/" + obj.id)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    // console.log(res);
+                    return res.json();
+                })
+                .then(model => {
+                    console.log(model);
+                    //TODO: Построить отображение модельки
+                    let div = document.getElementById("mainModels");
+                    div.innerHTML = "";
+                    let img = document.createElement("img");
+                    img.classList.add("admin_models_thumbs");
+                    img.src = model.imgUrl;
+                    div.appendChild(img);
+                })
+                .catch(err => { onError(err); });
+        }
 
-    function getAllModels() {
-        fetch(apiModels)
-            .then(res => {
-                if (res.status !== 200) {
-                    onError(res);
-                    return;
+        function renderModelsNav(models) {
+            //console.log(models);
+            let div = document.getElementById("navModels");
+            div.innerHTML = "";
+            let ul = document.createElement("ul");
+
+            models.map(model => {
+                // console.log(model);
+                let li = document.createElement("li");
+                li.innerText = model.name;
+                li.id = model.id;
+                li.onclick = function () {
+                    renderModel(this);
                 }
-                console.log(res);
-                return res.json();
+                ul.appendChild(li);
             })
-            .then(json => {
-                renderModelsNav(json);
-            })
-            .catch(err => { onError(err); });
-    }
+            div.appendChild(ul);
+        }
 
-    getAllModels();
-</script>
+        function getAllModels() {
+            fetch(apiModels)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    // console.log(res);
+                    return res.json();
+                })
+                .then(models => {
+                    renderModelsNav(models);
+                })
+                .catch(err => { onError(err); });
+        }
+
+        getAllModels();
+
+
+    </script>
 }
