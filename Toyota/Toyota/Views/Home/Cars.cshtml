@@ -6,17 +6,20 @@
     <h1 class="display-4">Cars</h1>
 </div>
 <div id="navModels">
-    Тут будут ссылки ан название моделей
+
 </div>
 
 <div id="mainModels">
-    Тут будет активная модель
+
 </div>
 
 @section Scripts {
     <script>
 
         let apiModels = "/api/ApiModels";
+        let apiModifications = "/Api/GetModifications";
+        let apiModificationColors = "/Api/GetModificationColors";
+        let apiModificationColorsImg = "/Api/GetModificationColorsImg";
 
         function onError(err) {
             console.log("Err");
@@ -37,25 +40,167 @@
                 .then(model => {
                     console.log(model);
                     //TODO: Построить отображение модельки
-                    let div = document.getElementById("mainModels");
-                    div.innerHTML = "";
+                    let mainModels = document.getElementById("mainModels");
+                    let div = document.createElement("div");
+                    div.classList.add("border");
+                    div.classList.add("p-3");
+                    let h3 = document.createElement("h3");
+                    h3.innerText = model.name;
                     let img = document.createElement("img");
-                    img.classList.add("admin_models_thumbs");
+                    img.classList.add("models_thumbs");
                     img.src = model.imgUrl;
+                    div.appendChild(h3);
                     div.appendChild(img);
+                    mainModels.innerHTML = "";
+                    mainModels.appendChild(div);
+                    renderModification(model.id);
                 })
                 .catch(err => { onError(err); });
+        }
+
+        function renderModification(obj) {
+            console.log(obj);
+            fetch(apiModifications + "/" + obj)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    // console.log(res);
+                    return res.json();
+                })
+                .then(modifications => {
+                    console.log(modifications);
+                    let mainModels = document.getElementById("mainModels");
+                    let select = document.createElement("select");
+                    select.classList.add("form-select");
+                    for (let modification of modifications) {
+                        let option = document.createElement("option");
+                        option.value = modification.imgUrl;
+                        option.dataset.id = modification.id;
+                        option.innerText = modification.name;
+                        select.appendChild(option);
+                    }
+                    mainModels.appendChild(select);
+                    var div = document.createElement("div");
+                    div.classList.add("border");
+                    div.classList.add("p-3");
+                    div.id = "divColor";
+                    div.innerHTML = "";
+                    var h4 = document.createElement("h4");
+                    h4.innerHTML = select[select.selectedIndex].innerText + "<br>";
+                    var img = document.createElement("img");
+                    img.id = "img-mod";
+                    img.classList.add("modifications_thumbs");
+                    img.src = select[select.selectedIndex].value;
+                    div.appendChild(h4);
+                    div.appendChild(img);
+                    mainModels.appendChild(div);
+                    renderModificationColors(select[select.selectedIndex].dataset.id);
+                    select.onchange = function (e) {
+                        div.innerHTML = "";
+                        h4.innerHTML = "";
+                        h4.innerHTML = select[select.selectedIndex].innerText + "<br>";
+                        img.src = "";
+                        img.src = e.target.value;
+                        div.appendChild(h4);
+                        div.appendChild(img);
+                        renderModificationColors(select[select.selectedIndex].dataset.id);
+                    }
+                })
+        }
+
+        function renderModificationColors(obj) {
+            console.log(obj);
+            fetch(apiModificationColors + "/" + obj)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    // console.log(res);
+                    return res.json();
+                })
+                .then(modificationColors => {
+                    console.log(modificationColors);
+                    let mainModels = document.getElementById("mainModels");
+                    let divColor = document.getElementById("divColor");
+                    let select = document.createElement("select");
+                    select.id = "select-color";
+                    select.classList.add("form-select");
+                    for (let modificationColor of modificationColors) {
+                        let option = document.createElement("option");
+                        option.innerText = modificationColor.name;
+                        option.value = modificationColor.id;
+                        /*let img = document.getElementById("img-mod");
+                        img.src = modificationColor.imgUrl;*/
+                        renderModificationColorsImg(obj);
+                        select.appendChild(option);
+                    }
+                    divColor.appendChild(select);
+                    mainModels.appendChild(divColor);
+                })
+        }
+
+        function renderModificationColorsImg(obj) {
+            console.log(obj);
+            fetch(apiModificationColorsImg + "/" + obj)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    // console.log(res);
+                    return res.json();
+                })
+                .then(modificationColors => {
+                    console.log(modificationColors);
+                    let mainModels = document.getElementById("mainModels");
+                    let divColor = document.getElementById("divColor");
+                    let select = document.getElementById("select-color");
+                    for (let modificationColor of modificationColors) {
+                        if (select[select.selectedIndex].value == modificationColor.colorId) {
+                            let img = document.getElementById("img-mod");
+                            img.src = modificationColor.imgUrl;
+                        }
+                    }
+                    select.onchange = function (e) {
+                        for (let modificationColor of modificationColors) {
+                            if (select[select.selectedIndex].value == modificationColor.colorId) {
+                                let img = document.getElementById("img-mod");
+                                img.src = modificationColor.imgUrl;
+                            }
+                        }
+                    }
+                })
         }
 
         function renderModelsNav(models) {
             //console.log(models);
             let div = document.getElementById("navModels");
             div.innerHTML = "";
+            div.classList.add("dropdown");
+            /*let btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-secondary");
+            btn.classList.add("dropdown-toggle");
+            btn.id = "dropdownMenuButton";
+            btn.databstoggle = "dropdown";
+            btn.ariaExpanded = "false";
+            btn.innerText = "Car Models";
+            btn.type = "button";
+            div.appendChild(btn);
             let ul = document.createElement("ul");
+            ul.classList.add("dropdown-menu");
+            ul.ariaLabelledBy = "dropdownMenuButton";*/
 
+            div.innerHTML = "<button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>"+
+                "Car Models</button > <ul id='ul-dropdown' class='dropdown-menu' aria-labelledby='dropdownMenuButton1'></ul>"
+            let ul = document.getElementById("ul-dropdown");
             models.map(model => {
                 // console.log(model);
                 let li = document.createElement("li");
+                li.classList.add("dropdown-item");
                 li.innerText = model.name;
                 li.id = model.id;
                 li.onclick = function () {
@@ -63,7 +208,7 @@
                 }
                 ul.appendChild(li);
             })
-            div.appendChild(ul);
+            /*div.appendChild(ul);*/
         }
 
         function getAllModels() {
