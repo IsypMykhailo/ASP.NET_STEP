@@ -1,0 +1,29 @@
+﻿
+
+<div class="callBack">
+    <input type="text" id="callbackName" />
+    <input type="text" id="callbackPhone" />
+    <input type="button" id="callbackSend" value="Send" />
+</div>
+
+<script>
+    document.getElementById("callbackSend").onclick = function () {
+        let callBack = {
+            Name: document.getElementById("callbackName").value,
+            Phone: document.getElementById("callbackPhone").value
+        }
+
+        fetch("/api/StoreCallBack", {
+            method: 'POST',            
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(callBack)
+        })
+            .then(res => { console.log(res); return res.json() })
+            .then(cb => console.log(cb))
+            .catch(err => console.log(err));
+
+        console.log(callBack);
+    }
+</script>

@@ -16,6 +16,16 @@ namespace Toyota.Data
 
         public DbSet<ModificationColors> ModificationColors { get; set; }
 
+        public DbSet<CallBack> CallBacks { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<CallBack>()
+                .Property(b => b.CreatedAt)
+                .HasDefaultValueSql("getdate()");
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
