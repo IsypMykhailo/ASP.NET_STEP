@@ -180,19 +180,6 @@
             let div = document.getElementById("navModels");
             div.innerHTML = "";
             div.classList.add("dropdown");
-            /*let btn = document.createElement("button");
-            btn.classList.add("btn");
-            btn.classList.add("btn-secondary");
-            btn.classList.add("dropdown-toggle");
-            btn.id = "dropdownMenuButton";
-            btn.databstoggle = "dropdown";
-            btn.ariaExpanded = "false";
-            btn.innerText = "Car Models";
-            btn.type = "button";
-            div.appendChild(btn);
-            let ul = document.createElement("ul");
-            ul.classList.add("dropdown-menu");
-            ul.ariaLabelledBy = "dropdownMenuButton";*/
 
             div.innerHTML = "<button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>"+
                 "Car Models</button > <ul id='ul-dropdown' class='dropdown-menu' aria-labelledby='dropdownMenuButton1'></ul>"
@@ -208,7 +195,6 @@
                 }
                 ul.appendChild(li);
             })
-            /*div.appendChild(ul);*/
         }
 
         function getAllModels() {
