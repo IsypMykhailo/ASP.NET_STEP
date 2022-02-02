@@ -1,10 +1,24 @@
 ﻿
 
 <div class="callBack">
-    <input type="text" id="callbackName" />
-    <input type="text" id="callbackPhone" />
-    <input type="button" id="callbackSend" value="Send" />
+    <div class="input-group mb-3 m-3 div-input">
+        <span class="input-group-text">Name</span>
+        <input type="text" class="form-control" id="callbackName" />
+    </div>
+
+    <div class="input-group mb-3 m-3 div-input">
+        <span class="input-group-text">Phone</span>
+        <input type="text" class="form-control" id="callbackPhone" />
+    </div>
+
+    <input type="button" class="btn btn-primary m-3" id="callbackSend" value="Send" />
 </div>
+
+<style>
+    .div-input{
+        width:300px;
+    }
+</style>
 
 <script>
     document.getElementById("callbackSend").onclick = function () {
@@ -14,7 +28,7 @@
         }
 
         fetch("/api/StoreCallBack", {
-            method: 'POST',            
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
