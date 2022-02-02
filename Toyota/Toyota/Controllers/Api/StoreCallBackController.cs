@@ -29,6 +29,9 @@ namespace Toyota.Controllers.Api
             _context.CallBacks.Add(callBack);
             await _context.SaveChangesAsync();
 
+            Helpers.Notification.Telegram.SendMessage("New Message");
+            await Helpers.Notification.Email.SendEmailAsync();
+
             return CreatedAtAction("GetCallBack", new { id = callBack.Id }, callBack);
         }
 

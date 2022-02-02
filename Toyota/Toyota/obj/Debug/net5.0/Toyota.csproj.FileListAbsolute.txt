@@ -185,3 +185,6 @@ D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\To
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\AdminCars\CreateColors.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\Shared\_CallBackPartial.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Toyota.csproj.AssemblyReference.cache
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\MailKit.dll
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\MimeKit.dll
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\BouncyCastle.Crypto.dll
