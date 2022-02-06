@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Toyota.Data;
 using Toyota.Models;
 
 namespace Toyota.Controllers
@@ -13,14 +14,19 @@ namespace Toyota.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
+            _context = db;
         }
 
         public IActionResult Index()
         {
             // Helpers.Notification.Email.SendEmailAsync();
+            var d = new Helpers.DataBase.Dump.Create();
+            d.DumpColors(_context);
             return View();
         }
 

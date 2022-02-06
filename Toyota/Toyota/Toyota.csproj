@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\storage\modifications_thumbs\" />
     <Folder Include="wwwroot\storage\modification_colors_thumbs\" />
+    <Folder Include="wwwroot\storage\dumps\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
