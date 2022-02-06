@@ -30,7 +30,8 @@ namespace Toyota.Controllers.Api
             await _context.SaveChangesAsync();
 
             Helpers.Notification.Telegram.SendMessage("New Message");
-            await Helpers.Notification.Email.SendEmailAsync();
+            await Helpers.Notification.Email.SendEmailAsync(); // Админу сайта
+            await Helpers.Notification.Email.SendEmailAsync(callBack.Email); // Пользователю
 
             return CreatedAtAction("GetCallBack", new { id = callBack.Id }, callBack);
         }

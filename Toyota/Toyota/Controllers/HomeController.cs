@@ -20,6 +20,7 @@ namespace Toyota.Controllers
 
         public IActionResult Index()
         {
+            // Helpers.Notification.Email.SendEmailAsync();
             return View();
         }
 
