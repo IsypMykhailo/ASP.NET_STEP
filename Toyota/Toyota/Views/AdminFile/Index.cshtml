@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "File Commander";
+}
+
+<div>
+    <ul>
+        @foreach (var d in ViewBag.Directories)
+        {
+            <li onclick="onDirClick(this)"><span>@d</span></li>
+        }
+    </ul>
+    
+    <ul>
+        @foreach(var f in ViewBag.Files)
+        {
+            <li>@f</li>
+        }
+    </ul>
+</div>
+
+@section Scripts {
+<script>
+    function onDirClick(el) {
+        event.stopPropagation();
+        let dir = el.firstChild.innerText;
+        //let dir = el.textContent.toString();
+        //dir = dir.replace("/", "\\");
+        console.log(dir);
+        fetch("/api/GetAdminFiles/"+dir)
+            .then(res => res.json())
+            .then(dirs => {
+                console.log(dirs);
+                let ul = document.createElement("ul");
+                dirs.map(dir => {
+                    let li = document.createElement("li");
+                    li.onclick = onDirClick;
+                    let span = document.createElement("span");
+                    span.innerText = dir;
+                    li.appendChild(span);
+                    ul.appendChild(li);
+                })
+                el.appendChild(ul);
+            })
+            .catch(err => { console.log("ERR:"); console.log(err); })
+    }
+</script>
+}

@@ -188,3 +188,4 @@ D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\To
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\MailKit.dll
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\MimeKit.dll
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\AdminFile\Index.cshtml.g.cs

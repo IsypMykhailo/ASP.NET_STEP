@@ -25,8 +25,8 @@ namespace Toyota.Controllers
         public IActionResult Index()
         {
             // Helpers.Notification.Email.SendEmailAsync();
-            var d = new Helpers.DataBase.Dump.Create();
-            d.DumpColors(_context);
+            /*var d = new Helpers.DataBase.Dump.Create();
+            d.DumpColors(_context);*/
             return View();
         }
 
