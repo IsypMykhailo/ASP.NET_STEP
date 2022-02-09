@@ -3,17 +3,17 @@
 }
 
 <div>
-    <ul>
+    <ul class="list-group">
         @foreach (var d in ViewBag.Directories)
         {
-            <li><span data-dirname="@d" onclick="onDirClick()">@d</span></li>
+            <li class="list-group-item list-group-item-action"><span data-dirname="@d" onclick="onDirClick()">@d</span></li>
         }
     </ul>
 
-    <ul>
+    <ul class="list-group">
         @foreach (var f in ViewBag.Files)
         {
-            <li>@f</li>
+            <li class="list-group-item list-group-item-action">@f</li>
         }
     </ul>
 
@@ -33,6 +33,12 @@
             dir = dir.replaceAll('/', '~');
             dir = dir.replaceAll('\\', '~');
             console.log(dir);
+            let oldEl = el.querySelector("ul");
+            if (oldEl !== null) {
+                oldEl.remove();
+            } else {
+                console.log("NoParent");
+            }
             fetch("/api/GetAdminFiles/" + dir)
                 .then(res => {
                     console.log(res.statusText);
@@ -41,8 +47,12 @@
                 .then(dirs => {
                     console.log(dirs);
                     let ul = document.createElement("ul");
+                    ul.classList.add("list-group");
+                    ul.classList.add("list-group-item-action");
                     dirs.map(dir => {
                         let li = document.createElement("li");
+                        li.classList.add("list-group-item");
+                        li.classList.add("list-group-item-action");
                         let span = document.createElement("span");
                         span.onclick = onDirClick;
                         span.dataset.dirname = dir;
