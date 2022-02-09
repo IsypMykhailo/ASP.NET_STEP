@@ -6,42 +6,53 @@
     <ul>
         @foreach (var d in ViewBag.Directories)
         {
-            <li onclick="onDirClick(this)"><span>@d</span></li>
+            <li><span data-dirname="@d" onclick="onDirClick()">@d</span></li>
         }
     </ul>
-    
+
     <ul>
-        @foreach(var f in ViewBag.Files)
+        @foreach (var f in ViewBag.Files)
         {
             <li>@f</li>
         }
     </ul>
+
 </div>
 
+
 @section Scripts {
-<script>
-    function onDirClick(el) {
-        event.stopPropagation();
-        let dir = el.firstChild.innerText;
-        //let dir = el.textContent.toString();
-        //dir = dir.replace("/", "\\");
-        console.log(dir);
-        fetch("/api/GetAdminFiles/"+dir)
-            .then(res => res.json())
-            .then(dirs => {
-                console.log(dirs);
-                let ul = document.createElement("ul");
-                dirs.map(dir => {
-                    let li = document.createElement("li");
-                    li.onclick = onDirClick;
-                    let span = document.createElement("span");
-                    span.innerText = dir;
-                    li.appendChild(span);
-                    ul.appendChild(li);
+    <script>
+        function onDirClick() {
+            el = event.target;
+            event.stopPropagation();
+
+            // let dir = el.textContent.toString();
+            let dir = event.target.dataset.dirname;
+            console.log("try get: ");
+            dir = dir.trim();
+            dir = dir.replaceAll('/', '~');
+            dir = dir.replaceAll('\\', '~');
+            console.log(dir);
+            fetch("/api/GetAdminFiles/" + dir)
+                .then(res => {
+                    console.log(res.statusText);
+                    return res.json();
                 })
-                el.appendChild(ul);
-            })
-            .catch(err => { console.log("ERR:"); console.log(err); })
-    }
-</script>
+                .then(dirs => {
+                    console.log(dirs);
+                    let ul = document.createElement("ul");
+                    dirs.map(dir => {
+                        let li = document.createElement("li");
+                        let span = document.createElement("span");
+                        span.onclick = onDirClick;
+                        span.dataset.dirname = dir;
+                        span.innerText = dir;
+                        li.appendChild(span);
+                        ul.appendChild(li);
+                    })
+                    el.appendChild(ul);
+                })
+                .catch(err => { console.log("ERR:"); console.log(err); })
+        }
+    </script>
 }
