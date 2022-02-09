@@ -15,8 +15,7 @@ namespace Toyota.Controllers.Api
         [HttpGet("{path}")]
         public async Task<ActionResult<string[]>> GetDirs(string? path)
         {
-            string curDir = "/";
-
+            path = path.Replace("~", "\\");
             string rootDir = Helpers.Media.WebRootStoragePath;            
             string[] dirs = Directory.GetDirectories(rootDir + path);
 
