@@ -194,3 +194,4 @@ D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\To
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\Toyota\Toyota\obj\Debug\net5.0\Razor\Views\Home\Jwt.cshtml.g.cs
