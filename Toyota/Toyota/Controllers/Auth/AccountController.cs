@@ -116,21 +116,28 @@ namespace Toyota.Controllers.Auth
 
         private ClaimsIdentity GetIdentity(string username, string password)
         {
-            var user = _context.Users.FirstOrDefault(x => x.UserName == username && x.PasswordHash == password);
-            //var role = _context.UserRoles.FirstOrDefault(role => role.UserId == user.Id);
+            MyIdentityUser identity = null;
+            var users = _context.Users.Where(user => user.UserName == username);
 
-            if (user != null)
+            foreach (var user in users)
+            {
+                if (user.UserName == username && passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password) == PasswordVerificationResult.Success)
+                {
+                    identity = user;
+                    break;
+                }
+            }
+
+            if (identity == null)
                 return null;
-            
+
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, "user")
+                new Claim(ClaimsIdentity.DefaultNameClaimType, identity.UserName),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, "admin")
             };
-            ClaimsIdentity claimsIdentity =
-            new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                ClaimsIdentity.DefaultRoleClaimType);
-            return claimsIdentity;
+
+            return new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
         }
 
 
