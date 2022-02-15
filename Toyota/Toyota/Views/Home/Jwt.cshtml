@@ -4,21 +4,21 @@
 
 <div id="userInfo" style="display:none;">
     <p>Вы вошли как: <span id="userName"></span></p>
-    <input type="button" value="Выйти" id="logOut" />
+    <input type="button" value="Выйти" id="logOut" class="btn btn-primary"/>
 </div>
-<div id="loginForm">
-    <h3>Вход на сайт</h3>
-    <label>Введите email</label><br />
-    <input type="email" id="emailLogin" /> <br /><br />
-    <label>Введите пароль</label><br />
-    <input type="password" id="passwordLogin" /><br /><br />
-    <input type="submit" id="submitLogin" value="Логин" />
+<div id="loginForm" class="mb-3">
+    <h3 class="h3">Вход на сайт</h3>
+    <label class="form-label">Введите email</label><br />
+    <input type="email" id="emailLogin" class="form-control"/><br />
+    <label class="form-label">Введите пароль</label><br />
+    <input type="password" id="passwordLogin" class="form-control"/><br />
+    <input type="submit" id="submitLogin" value="Логин" class="btn btn-primary"/> <br />
 </div>
-<div>
-    <input type="submit" id="getDataByLogin" value="Данные по логину" />
+<div class="mb-3">
+    <input type="submit" id="getDataByLogin" value="Данные по логину" class="btn btn-secondary"/>
 </div>
-<div>
-    <input type="submit" id="getDataByRole" value="Данные по роли" />
+<div class="mb-3">
+    <input type="submit" id="getDataByRole" value="Данные по роли" class="btn btn-secondary"/>
 </div>
 
 <script>
