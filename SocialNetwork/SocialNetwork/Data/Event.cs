@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Data
 {
-    public class Comment
+    public class Event
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public Post Post { get; set; }
         public User Author { get; set; }
-
-        public Comment? ParentComment { get; set; }
-        public List<Comment> ChildrenComments { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public User TargetUser { get; set; }
+        public Like? Like { get; set; }
+        public Comment? Comment { get; set; }
     }
 }
