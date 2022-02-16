@@ -31,7 +31,7 @@ namespace SocialNetwork.Data
                 .HasDefaultValueSql("getdate()");
             builder.Entity<User>()
                 .Property(b => b.ImgUrl)
-                .HasDefaultValueSql("/storage/avatar-none.png");
+                .HasDefaultValueSql("/storage/UserAvatars/avatar-none.png");
         }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
