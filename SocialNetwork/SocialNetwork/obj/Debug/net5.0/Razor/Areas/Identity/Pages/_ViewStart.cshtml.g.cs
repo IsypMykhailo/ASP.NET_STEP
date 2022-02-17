@@ -12,7 +12,36 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
+#nullable restore
+#line 1 "D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\Areas\Identity\Pages\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\Areas\Identity\Pages\_ViewImports.cshtml"
+using SocialNetwork.Areas.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\Areas\Identity\Pages\_ViewImports.cshtml"
+using SocialNetwork.Areas.Identity.Pages;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\Areas\Identity\Pages\_ViewImports.cshtml"
+using SocialNetwork.Data;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"13b82ef97968a56a4de533f67cf3e21d662f41aa", @"/Areas/Identity/Pages/_ViewStart.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cf3f414ce6cd87daf5533a1c970bf4a066ab020e", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
     public class Areas_Identity_Pages__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
