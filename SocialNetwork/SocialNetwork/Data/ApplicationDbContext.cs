@@ -63,6 +63,16 @@ namespace SocialNetwork.Data
                 .HasMany(c => c.ChildrenComments)
                 .WithOne(p => p.ParentComment)
                 .HasForeignKey(c => c.ParentComment.Id);
+
+            builder.Entity<User>()
+                .HasMany(f=>f.Followers)
+                .WithMany(f=>f.Following)
+                .UsingEntity(j => j.ToTable("Follows"));
+
+            builder.Entity<User>()
+                .HasMany(f => f.Following)
+                .WithMany(f => f.Followers)
+                .UsingEntity(j => j.ToTable("Follows"));
         }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
