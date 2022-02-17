@@ -163,3 +163,8 @@ D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\So
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ConfirmEmail.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ForgotPassword.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.g.cs

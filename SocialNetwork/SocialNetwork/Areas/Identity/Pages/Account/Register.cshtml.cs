@@ -47,6 +47,20 @@ namespace SocialNetwork.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [DataType(DataType.Text)]
+            [Display(Name ="Страна")]
+            public string Location { get; set; }
+
+            [DataType(DataType.Text)]
+            [Display(Name ="Имя")]
+            public string FullName { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name ="Дата рождения")]
+            public DateTime BirthDate { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -54,11 +68,11 @@ namespace SocialNetwork.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Пароль")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Подтверждение пароля")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
