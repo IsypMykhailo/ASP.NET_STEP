@@ -17,7 +17,7 @@ namespace SocialNetwork.Data
         public string Location { get; set; }
         public string ImgUrl { get; set; }
         
-        public List<User> Friends { get; set; }
+        //public List<User> Friends { get; set; }
         public List<User> Followers { get; set; }
         public List<User> Following { get; set; }
 
