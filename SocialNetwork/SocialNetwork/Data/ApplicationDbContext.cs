@@ -31,38 +31,7 @@ namespace SocialNetwork.Data
                 .HasDefaultValueSql("getdate()");
             builder.Entity<User>()
                 .Property(b => b.ImgUrl)
-                .HasDefaultValueSql("/storage/UserAvatars/avatar-none.png");
-
-            builder.Entity<User>()
-                .HasMany(c => c.Comments)
-                .WithOne(a => a.Author)
-                .HasForeignKey(c => c.Author.Id);
-            builder.Entity<User>()
-                .HasMany(c => c.Posts)
-                .WithOne(a => a.Author)
-                .HasForeignKey(c => c.Author.Id);
-            builder.Entity<User>()
-                .HasMany(c => c.Likes)
-                .WithOne(a => a.Author)
-                .HasForeignKey(c => c.Author.Id);
-
-            builder.Entity<Post>()
-                .HasMany(l => l.Likes)
-                .WithOne(p => p.Post)
-                .HasForeignKey(p => p.Post.Id);
-            builder.Entity<Post>()
-                .HasMany(c => c.Comments)
-                .WithOne(p => p.Post)
-                .HasForeignKey(p => p.Post.Id);
-            builder.Entity<Post>()
-                .HasMany(i => i.Images)
-                .WithOne(p => p.Post)
-                .HasForeignKey(p => p.Post.Id);
-
-            builder.Entity<Comment>()
-                .HasMany(c => c.ChildrenComments)
-                .WithOne(p => p.ParentComment)
-                .HasForeignKey(c => c.ParentComment.Id);
+                .HasDefaultValueSql("'/storage/UserAvatars/avatar-none.png'");
 
             builder.Entity<User>()
                 .HasMany(f=>f.Followers)
