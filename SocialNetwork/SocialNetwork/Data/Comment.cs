@@ -11,11 +11,12 @@ namespace SocialNetwork.Data
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        public string Text { get; set; }
         public Post Post { get; set; }
         public User Author { get; set; }
 
         public Comment? ParentComment { get; set; }
-        public List<Comment> ChildrenComments { get; set; }
+        public List<Comment>? ChildrenComments { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }
