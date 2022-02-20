@@ -11,11 +11,11 @@ namespace SocialNetwork.Data
         public string? TelegramId { get; set; }
         public string? Description { get; set; }
         public string? Status { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public string? ProfileUrl { get; set; }
         public string? FullName { get; set; }
-        public string Location { get; set; }
-        public string ImgUrl { get; set; }
+        public string? Location { get; set; }
+        public string? ImgUrl { get; set; }
         
         //public List<User> Friends { get; set; }
         public List<User> Followers { get; set; }

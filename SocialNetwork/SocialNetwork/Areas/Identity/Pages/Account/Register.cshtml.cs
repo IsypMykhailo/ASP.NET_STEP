@@ -48,11 +48,11 @@ namespace SocialNetwork.Areas.Identity.Pages.Account
         {
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name ="Страна")]
-            public string Location { get; set; }
+            [Display(Name = "Имя пользователя")]
+            public string UserName { get; set; }
 
             [DataType(DataType.Text)]
-            [Display(Name ="Имя")]
+            [Display(Name ="ФИО")]
             public string FullName { get; set; }
 
             [Required]
@@ -89,7 +89,7 @@ namespace SocialNetwork.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
+                var user = new User { UserName = Input.UserName, Email = Input.Email, FullName = Input.FullName, BirthDate = Input.BirthDate };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
