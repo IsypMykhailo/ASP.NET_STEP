@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialNetwork.Data;
+using SocialNetwork.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,6 +38,7 @@ namespace SocialNetwork
             sb.DataSource = @"(LocalDB)\MSSQLLocalDB";
             sb.IntegratedSecurity = true;
             sb.ConnectTimeout = 30;
+            services.AddTransient<IEmailSender, EmailService>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     sb.ToString()));
