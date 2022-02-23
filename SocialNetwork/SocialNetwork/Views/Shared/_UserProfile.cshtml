@@ -5,35 +5,28 @@
     var u = UserManager.GetUserAsync(User).Result;
 }
 <style>
-    .avatar{
-        border: 0.5px solid black;
-        border-radius: 50%;
+    
+    #formLogout{
+        height: 100%;
+    }
+    #btnLogout{
+        height: 100%;
+    }
+    #userAvatar{
+        height: 50px;
     }
 </style>
+
 <ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            <!--<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>-->
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                <img class="avatar" src="@u.ImgUrl" width="50"/>
-                @UserManager.GetUserName(User)
-            </a>
-        </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-            <!--<a class="nav-link text-dark" asp-area="Identity" asp-controller="Home" asp-action="Jwt">Login</a>-->
-        </li>
-    }
+   <li class="nav-item">
+       <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+           <img id="userAvatar" class="avatar" src="@u.ImgUrl"/>
+           <span class="align-middle">@UserManager.GetUserName(User)</span>
+       </a>
+   </li>
+   <li class="nav-item">
+       <form class="form-inline" id="formLogout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+           <button type="submit" id="btnLogout" class="nav-link btn btn-link text-dark align-middle">Logout</button>
+       </form>
+   </li>
 </ul>
