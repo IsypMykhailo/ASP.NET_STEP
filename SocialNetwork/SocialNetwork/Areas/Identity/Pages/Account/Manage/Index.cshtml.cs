@@ -37,8 +37,14 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             [Display(Name ="Profile Image")]
             public string ImgUrl { get; set; }
 
+            [Display(Name = "Full Name")]
+            public string FullName { get; set; }
+
             [Display(Name = "Description")]
             public string Description { get; set; }
+
+            [Display(Name = "Status")]
+            public string Status { get; set; }
 
             [Display(Name = "Telegram Id")]
             public string TelegramId { get; set; }
@@ -54,9 +60,11 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(User user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
+            var fullName = user.FullName;
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var imgUrl = user.ImgUrl;
             var description = user.Description;
+            var status = user.Status;
             var telegramId = user.TelegramId;
             var location = user.Location;
 
@@ -66,7 +74,9 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber,
                 ImgUrl = imgUrl,
+                FullName = fullName,
                 Description = description,
+                Status = status,
                 TelegramId = telegramId,
                 Location = location
             };
@@ -117,6 +127,14 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             if(Input.Description != user.Description)
             {
                 user.Description = Input.Description;
+            }
+            if (Input.Status != user.Status)
+            {
+                user.Status = Input.Status;
+            }
+            if (Input.FullName != user.FullName)
+            {
+                user.FullName = Input.FullName;
             }
             if (Input.Location != user.Location)
             {
