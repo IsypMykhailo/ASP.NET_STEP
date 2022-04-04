@@ -37,6 +37,15 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             [Display(Name ="Profile Image")]
             public string ImgUrl { get; set; }
 
+            [Display(Name = "Description")]
+            public string Description { get; set; }
+
+            [Display(Name = "Telegram Id")]
+            public string TelegramId { get; set; }
+
+            [Display(Name = "Location")]
+            public string Location { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -47,13 +56,19 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var imgUrl = user.ImgUrl;
+            var description = user.Description;
+            var telegramId = user.TelegramId;
+            var location = user.Location;
 
             Username = userName;
 
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                ImgUrl = imgUrl
+                ImgUrl = imgUrl,
+                Description = description,
+                TelegramId = telegramId,
+                Location = location
             };
         }
 
@@ -98,6 +113,18 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             if (fileToStorage != null)
             {
                 user.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "UserAvatars");
+            }
+            if(Input.Description != user.Description)
+            {
+                user.Description = Input.Description;
+            }
+            if (Input.Location != user.Location)
+            {
+                user.Location = Input.Location;
+            }
+            if (Input.TelegramId != user.TelegramId)
+            {
+                user.TelegramId = Input.TelegramId;
             }
             await _userManager.UpdateAsync(user);
 
