@@ -16,6 +16,7 @@ namespace SocialNetwork.Data
         public string? FullName { get; set; }
         public string? Location { get; set; }
         public string? ImgUrl { get; set; }
+        public string? Background { get; set; }
         
         //public List<User> Friends { get; set; }
         public List<User> Followers { get; set; }

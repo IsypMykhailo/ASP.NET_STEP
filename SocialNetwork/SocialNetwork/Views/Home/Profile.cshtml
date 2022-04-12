@@ -1,0 +1,213 @@
+﻿@model IEnumerable<SocialNetwork.Data.Post>
+@using Microsoft.AspNetCore.Identity
+@using SocialNetwork.Data
+@using Microsoft.EntityFrameworkCore;
+@inject SignInManager<SocialNetwork.Data.User> SignInManager
+@inject UserManager<SocialNetwork.Data.User> UserManager
+@{
+    var u = UserManager.GetUserAsync(User).Result;
+}
+
+<!-- Подключение CSS файла -->
+<link rel="stylesheet" href="/modal/modal.css">
+
+<!-- Подключения JavaScript файла -->
+<script src="/modal/modal.js"></script>
+
+<style>
+    .postAvatar{
+
+    }
+
+    .postImg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .post {
+        width: 600px;
+    }
+
+    .divModalImg {
+        width: 600px;
+        overflow: hidden;
+        text-align: center;
+        padding: 0;
+    }
+
+    .divPost {
+        overflow: hidden;
+        border-radius: 10px;
+        border: 1px solid rgba(0,0,0,0);
+        padding: 0;
+        text-align: center;
+    }
+</style>
+
+<div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+            <div>
+                <div class="rounded-top text-black d-flex flex-row" style="background-image:url('@u.Background'); height:200px;">
+                    <!--background-color: #000; -->
+                    <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                        <!-- mt-5-->
+                        <img src="@u.ImgUrl" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1"> <!-- mt4-->
+
+                        <a class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;width:150px;" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                            Edit profile
+                        </a>
+
+                    </div>
+                    <div class="ms-3" style="margin-top:225px">
+                        <!--margin-top: 130px;-->
+                        <h5>@u.FullName</h5>
+                        <p>@u.Location</p>
+                    </div>
+                </div>
+                <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                    <div class="d-flex justify-content-end text-center py-1">
+                        <div>
+                            <p class="mb-1 h5">253</p>
+                            <p class="small text-muted mb-0">Photos</p>
+                        </div>
+                        <div class="px-3">
+                            <p class="mb-1 h5">1026</p>
+                            <p class="small text-muted mb-0">Followers</p>
+                        </div>
+                        <div>
+                            <p class="mb-1 h5">478</p>
+                            <p class="small text-muted mb-0">Following</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-4 text-black">
+                    <div class="mb-5">
+                        <p class="lead fw-normal mb-1">About</p>
+                        <div class="p-4" style="background-color: #f8f9fa;">
+                            <p class="font-italic mb-1">@u.Description</p>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="lead fw-normal mb-0">Posts</p>
+                    </div>
+                    <div class="row g-2 h-100" id="postsRender">
+
+                    </div>
+
+                    <input id="hd1" style="z-index: 101; left: 16px; position: absolute; top: 144px" type="hidden" value="@u.ImgUrl">
+                    <input id="hd2" style="z-index: 101; left: 16px; position: absolute; top: 144px" type="hidden" value="@u.UserName">
+
+                    <!--<div class="row g-2">
+        <div class="col mb-2">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp" alt="image 1" class="w-100 rounded-3">
+        </div>
+        <div class="col mb-2">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp" alt="image 1" class="w-100 rounded-3">
+        </div>
+        <div class="col mb-2">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp" alt="image 1" class="w-100 rounded-3">
+        </div>
+    </div>
+    <div class="row g-2">
+        <div class="col">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp" alt="image 1" class="w-100 rounded-3">
+        </div>
+        <div class="col">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp" alt="image 1" class="w-100 rounded-3">
+        </div>
+        <div class="col">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp" alt="image 1" class="w-100 rounded-3">
+        </div>
+    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let apiPosts = "/api/ApiPosts";
+        let apiImages = "/api/GetImages";
+        let div = document.getElementById("postsRender");
+
+        function onError(err) {
+            console.log("Err");
+            console.log(err);
+        }
+
+        function renderImages(obj, divPost) {
+            console.log(obj);
+            fetch(apiImages + "/" + obj.id)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    // console.log(res);
+                    return res.json();
+                })
+                .then(images => {
+                    console.log(images);
+                    for (let image of images) {
+                        let img = document.createElement("img");
+                        img.src = image.imgUrl;
+                        img.classList.add("postImg");
+                        let userAvatar = document.getElementById("hd1").value;
+                        let userName = document.getElementById("hd2").value;
+                        let modalTitle = "<img class='postAvatar' src='" + userAvatar + "'> " + userName;
+                        let modalContent = "<img class='postImg' src='" + img.src + "'> <br><h3>Description</h3>" + obj.description;
+                        let modal = $modal({
+                            title: modalTitle,
+                            content: modalContent,
+                            footerButtons: [
+                                { class: 'btn btn__cancel', text: 'Отмена', handler: 'modalHandlerCancel' },
+                                { class: 'btn btn__ok', text: 'ОК', handler: 'modalHandlerOk' }
+                            ]
+                        });
+                        img.onclick = function () {
+                            modal.show();
+                            /*let divModal = document.createElement("div");
+                            let divModalImg = document.createElement("div");
+                            divModalImg.classList.add("divModalImg");
+                            divModalImg.innerHTML = "<img class='postImg' src='" + img.src + "'>";
+                            let divTitle = document.createElement("div");
+                            divTitle.innerHTML = " <br><h3>Description</h3>" + obj.description;
+                            divModal.appendChild(divModalImg);
+                            divModal.appendChild(divTitle);
+                            div.appendChild(divModal);*/
+                        }
+                        divPost.appendChild(img);
+                    }
+                })
+        }
+
+        function getAllPosts() {
+            fetch(apiPosts)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    return res.json();
+                })
+                .then(posts => {
+                    posts.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1);
+
+                    for (let post of posts) {
+                        let divPost = document.createElement("div");
+                        //divPost.innerHTML = post.description+"<br>";
+                        divPost.classList.add("col-md-4");
+                        divPost.classList.add("divPost");
+                        renderImages(post, divPost);
+                        div.appendChild(divPost);
+                    }
+                })
+                .catch(err => { onError(err); });
+        }
+
+        getAllPosts();
+    </script>
+}

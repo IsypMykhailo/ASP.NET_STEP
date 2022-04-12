@@ -37,6 +37,9 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             [Display(Name ="Profile Image")]
             public string ImgUrl { get; set; }
 
+            [Display(Name = "Profile Background")]
+            public string Background { get; set; }
+
             [Display(Name = "Full Name")]
             public string FullName { get; set; }
 
@@ -63,6 +66,7 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             var fullName = user.FullName;
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var imgUrl = user.ImgUrl;
+            var background = user.Background;
             var description = user.Description;
             var status = user.Status;
             var telegramId = user.TelegramId;
@@ -74,6 +78,7 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber,
                 ImgUrl = imgUrl,
+                Background = background,
                 FullName = fullName,
                 Description = description,
                 Status = status,
@@ -94,7 +99,7 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(IFormFile fileToStorage)
+        public async Task<IActionResult> OnPostAsync(IFormFile fileToStorage, IFormFile backToStorage)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -123,6 +128,11 @@ namespace SocialNetwork.Areas.Identity.Pages.Account.Manage
             if (fileToStorage != null)
             {
                 user.ImgUrl = await Helpers.Media.UploadImage(fileToStorage, "UserAvatars");
+                
+            }
+            if (backToStorage != null)
+            {
+                user.Background = await Helpers.Media.UploadImage(backToStorage, "UserBackgrounds");
             }
             if(Input.Description != user.Description)
             {

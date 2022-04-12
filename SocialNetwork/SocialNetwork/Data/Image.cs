@@ -13,5 +13,6 @@ namespace SocialNetwork.Data
         public Guid Id { get; set; }
         public string ImgUrl { get; set; }
         public Post Post { get; set; }
+        public Guid PostId { get; set; }
     }
 }

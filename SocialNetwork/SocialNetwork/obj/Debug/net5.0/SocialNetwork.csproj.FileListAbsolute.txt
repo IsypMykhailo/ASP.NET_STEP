@@ -191,3 +191,14 @@ D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\So
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
 D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\Shared\_UserProfile.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\Home\Profile.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminPosts\Create.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminPosts\Delete.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminPosts\Details.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminPosts\Edit.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminPosts\Index.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminImages\Create.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminImages\Delete.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminImages\Details.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminImages\Edit.cshtml.g.cs
+D:\ПРОГРАММИРОВАНИЕ\Программирование\ASP .NET\SocialNetwork\SocialNetwork\obj\Debug\net5.0\Razor\Views\AdminImages\Index.cshtml.g.cs

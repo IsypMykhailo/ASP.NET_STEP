@@ -24,6 +24,12 @@
                 <span asp-validation-for="Input.ImgUrl" class="text-danger"></span>
             </div>
             <div class="form-group my-2">
+                <label asp-for="Input.Background" class="control-label"></label><br />
+                <img src="@u.Background" class="my-2" width="200" />
+                <input type="file" name="backToStorage" class="form-control" id="formFile" />
+                <span asp-validation-for="Input.Background" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2">
                 <label asp-for="Username"></label>
                 <input asp-for="Username" class="form-control" disabled />
             </div>

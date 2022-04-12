@@ -34,6 +34,10 @@ namespace SocialNetwork.Data
                 .HasDefaultValueSql("'/storage/UserAvatars/avatar-none.png'");
 
             builder.Entity<User>()
+                .Property(b => b.Background)
+                .HasDefaultValueSql("'/storage/UserBackgrounds/default-background.png'");
+
+            builder.Entity<User>()
                 .HasMany(f=>f.Followers)
                 .WithMany(f=>f.Following)
                 .UsingEntity(j => j.ToTable("Follows"));
@@ -43,6 +47,7 @@ namespace SocialNetwork.Data
                 .WithMany(f => f.Followers)
                 .UsingEntity(j => j.ToTable("Follows"));
         }
+        public ApplicationDbContext() { }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
