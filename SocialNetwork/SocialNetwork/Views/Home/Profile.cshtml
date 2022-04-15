@@ -155,11 +155,11 @@
                             <p class="small text-muted mb-0">Posts</p>
                         </div>
                         <div class="px-3">
-                            <p class="mb-1 h5">1026</p>
+                            <p class="mb-1 h5" id="followers"></p>
                             <p class="small text-muted mb-0">Followers</p>
                         </div>
                         <div>
-                            <p class="mb-1 h5">478</p>
+                            <p class="mb-1 h5" id="following"></p>
                             <p class="small text-muted mb-0">Following</p>
                         </div>
                     </div>
@@ -173,6 +173,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <p class="lead fw-normal mb-0">Posts</p>
+                        <a asp-action="CreatePost" class="btn btn-primary">Add post</a>
                     </div>
                     <div class="row g-2 h-100" id="postsRender">
 
@@ -189,10 +190,10 @@
                             </div>
                             <div class="modal-body1" id="modal-body">
                                 <!--<p>Какой-то текст в теле модального окна</p>
-                                <p>Ещё другой текст...</p>-->
+                <p>Ещё другой текст...</p>-->
                             </div>
                             <div class="modal-footer1" id="modal-footer">
-                                
+
                             </div>
                         </div>
 
@@ -200,6 +201,8 @@
 
                     <input id="hd1" style="z-index: 101; left: 16px; position: absolute; top: 144px" type="hidden" value="@u.ImgUrl">
                     <input id="hd2" style="z-index: 101; left: 16px; position: absolute; top: 144px" type="hidden" value="@u.UserName">
+                    <input id="hd3" style="z-index: 101; left: 16px; position: absolute; top: 144px" type="hidden" value="@u.Id">
+                    <input id="hd4" style="z-index: 101; left: 16px; position: absolute; top: 144px" type="hidden" value="@u">
 
                     <!--<div class="row g-2">
         <div class="col mb-2">
@@ -233,12 +236,37 @@
     <script>
         let apiPosts = "/api/ApiPosts";
         let apiImages = "/api/GetImages";
+        let apiLikes = "/api/GetLikes";
+        let apiComments = "/api/GetComments";
+        let apiFollows = "/api/ApiFollows";
         let div = document.getElementById("postsRender");
 
         function onError(err) {
             console.log("Err");
             console.log(err);
         }
+
+        function renderFollows() {
+            let followingDiv = document.getElementById("following");
+            let followersDiv = document.getElementById("followers");
+            let userId = document.getElementById("hd3").value;
+            let user = document.getElementById("hd4").value;
+            fetch(apiFollows + "/" + userId)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    return res.json();
+                })
+                .then(follows => {
+                    console.log(follows);
+                    followersDiv.innerText = follows[0].followers.length;
+                    followingDiv.innerText = follows[0].following.length;
+                })
+        }
+
+        renderFollows();
 
         function renderImages(obj, divPost) {
             console.log(obj);
@@ -267,8 +295,9 @@
                             let modalContent = "<img class='postImgWindow' src='" + img.src + "'>";
                             let modalBody = document.getElementById("modal-body");
                             modalBody.innerHTML = modalContent;
-                            let modalFooter = document.getElementById("modal-footer");
-                            modalFooter.innerHTML = obj.description;
+                            renderLikes(obj);
+                            /*let modalFooter = document.getElementById("modal-footer");
+                            modalFooter.innerHTML += obj.description;  */                          
                             /*let divModal = document.createElement("div");
                             let divModalImg = document.createElement("div");
                             divModalImg.classList.add("divModalImg");
@@ -284,8 +313,78 @@
                 })
         }
 
+        function renderLikes(obj) {
+            console.log(obj);
+            fetch(apiLikes + "/" + obj.id)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    // console.log(res);
+                    return res.json();
+                })
+                .then(likes => {
+                    console.log(likes);
+                    let modalFooter = document.getElementById("modal-footer");
+                    let likeData = "<span style='font-size:30pt;'>&#x2661;</span><span style='font-size:26pt;'>" + likes.length;
+                    modalFooter.innerHTML = likeData;
+                    renderComments(obj);
+                })
+        }
+
+        function renderComments(obj) {
+            console.log(obj);
+            fetch(apiComments + "/" + obj.id)
+                .then(res => {
+                    if (res.status !== 200) {
+                        onError(res);
+                        return;
+                    }
+                    // console.log(res);
+                    return res.json();
+                })
+                .then(comments => {
+                    console.log(comments);
+                    let modalFooter = document.getElementById("modal-footer");
+                    let commentData = "<span style='font-size:28pt;margin-left:220px;'>&#9993;</span><span style='font-size:26pt;'>" + comments.length + "</span><br>" + obj.description;
+                    modalFooter.innerHTML += commentData;
+                    let inputComment = document.createElement("input");
+                    inputComment.classList.add("form-control");
+                    inputComment.placeholder = "Enter new comment";
+                    let btnComment = document.createElement("button");
+                    btnComment.classList.add("btn");
+                    btnComment.classList.add("btn-primary");
+                    btnComment.innerText = "Send";
+                    let userName = document.getElementById("hd2").value;
+                    let userId = document.getElementById("hd3").value;
+                    let user = document.getElementById("hd4").value;
+                    btnComment.onclick = function () {
+                        let _comment = {
+                            Text: inputComment.value,
+                            PostId: obj.id,
+                            AuthorId: userId
+                        }
+                        fetch(apiComments, {
+                            method: "POST",
+                            body: JSON.stringify(_comment),
+                            headers: { "Content-type": "application/json; charset=UTF-8" }
+                        })
+                        .then(response => response.json())
+                        .then(json => console.log(json))
+                        .catch (err => console.log(err));
+                    }                    
+                    modalFooter.appendChild(inputComment);
+                    modalFooter.appendChild(btnComment);
+                    for (let comment of comments) {
+                        modalFooter.innerHTML += "<p>" + comment.text + "</p>";
+                    }
+                })
+        }
+
         function getAllPosts() {
-            fetch(apiPosts)
+            let userId = document.getElementById("hd3").value;
+            fetch(apiPosts + "/" + userId)
                 .then(res => {
                     if (res.status !== 200) {
                         onError(res);

@@ -45,6 +45,7 @@ namespace SocialNetwork.Controllers.Admin
         // GET: AdminPosts/Create
         public IActionResult Create()
         {
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -53,7 +54,7 @@ namespace SocialNetwork.Controllers.Admin
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,CreatedAt")] Post post)
+        public async Task<IActionResult> Create([Bind("Id,Description,CreatedAt,AuthorId")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +63,7 @@ namespace SocialNetwork.Controllers.Admin
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "UserName", post.AuthorId);
             return View(post);
         }
 
